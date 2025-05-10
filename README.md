@@ -1,16 +1,16 @@
 # Fluxel
 
-**Fluxel** is a **compile‑time, signal‑driven UI framework** that lets you author components with ergonomic **TSX / JSX** functions and ships **zero‑runtime, native Web Components**. Think *Solid JSX + Stencil compile output + Lit‑style Shadow DOM*—but with fine‑grained reactivity and a micro‑sized core.
+**Fluxel** is a **compile‑time, signal‑driven UI framework** that lets you author components with ergonomic **TSX / JSX** functions and ships **zero‑runtime, native Web Components**. Think _Solid JSX + Stencil compile output + Lit‑style Shadow DOM_—but with fine‑grained reactivity and a micro‑sized core.
 
 ---
 
 ## Why Fluxel?
 
-* **Web‑standards first** → outputs Custom Elements you can drop into any stack (React, Vue, plain HTML).
-* **Signals, not VDOM** → sub‑millisecond updates; no diffing, no component re‑renders.
-* **Rust ⚙️ + SWC speed** → compilation in tens of milliseconds; HMR is near‑instant.
-* **Scoped by default** → Shadow DOM & Constructable StyleSheets give you bullet‑proof style isolation.
-* **Batteries included** → optional router, global state via signals, declarative Shadow DOM SSR.
+- **Web‑standards first** → outputs Custom Elements you can drop into any stack (React, Vue, plain HTML).
+- **Signals, not VDOM** → sub‑millisecond updates; no diffing, no component re‑renders.
+- **Rust ⚙️ + SWC speed** → compilation in tens of milliseconds; HMR is near‑instant.
+- **Scoped by default** → Shadow DOM & Constructable StyleSheets give you bullet‑proof style isolation.
+- **Batteries included** → optional router, global state via signals, declarative Shadow DOM SSR.
 
 ---
 
@@ -42,16 +42,16 @@
 
 ## Feature Roadmap
 
-* [ ] **Core signals** (`signal`, `computed`, `effect`, batching)
-* [ ] **SWC WASM compiler** (function → WC class, Shadow DOM attach)
-* [ ] **`fluxel-unplugin` universal adapter** (Vite/Rollup/Webpack/esbuild)
-* [ ] **HMR** (component replacement without page reload)
-* [ ] **Router** (`<FluxRouter>` with nested routes & lazy imports)
-* [ ] **Global store helpers** (derived signals, SSR state hydration)
-* [ ] **SSR/SSG renderer** (`renderToString`, CLI prerender)
-* [ ] **DevTools extension** (signal graph inspector, component tree)
-* [ ] **CLI scaffolder** (`npm create fluxel-app my-app`)
-* [ ] **DX polish** (VS Code snippets, ESLint rules, playground REPL)
+- [x] **Core signals** (`signal`, `computed`, `effect`, batching)
+- [ ] **SWC WASM compiler** (function → WC class, Shadow DOM attach)
+- [ ] **`fluxel-unplugin` universal adapter** (Vite/Rollup/Webpack/esbuild)
+- [ ] **HMR** (component replacement without page reload)
+- [ ] **Router** (`<FluxRouter>` with nested routes & lazy imports)
+- [ ] **Global store helpers** (derived signals, SSR state hydration)
+- [ ] **SSR/SSG renderer** (`renderToString`, CLI prerender)
+- [ ] **DevTools extension** (signal graph inspector, component tree)
+- [ ] **CLI scaffolder** (`npm create fluxel-app my-app`)
+- [ ] **DX polish** (VS Code snippets, ESLint rules, playground REPL)
 
 ---
 
@@ -61,4 +61,4 @@ Fluxel is MIT‑licensed. See [LICENSE](LICENSE) for details.
 
 ---
 
-> *Building tomorrow’s web, one custom element at a time.*
+> _Building tomorrow’s web, one custom element at a time._
