@@ -55,10 +55,97 @@
 
 ---
 
-## License
+## Core Concepts & What the Compiler Really Spits Out
 
-Fluxel is MIT‑licensed. See [LICENSE](LICENSE) for details.
+### 1 . Authoring ⟶ Signals + TSX
+
+```tsx
+// Counter.tsx – what you write
+import {signal} from "@fluxel/core";
+
+export interface CounterProps {
+  initial?: number;
+}
+
+export default function Counter({initial = 0}: CounterProps) {
+  const count = signal(initial);
+  return (
+    <div class="counter">
+      <p>Count: {count}</p>
+      <button onclick={() => (count.value += 1)}>+</button>
+    </div>
+  );
+}
+```
+
+| Concept                                      | Why it matters                                                                            |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Signals** (`signal`, `computed`, `effect`) | Fine-grained reactive primitives—changing `count.value` only patches one `<p>` text node. |
+| **Plain functions**                          | No classes or decorators; the compiler lifts your function into a Custom Element.         |
+| **Direct DOM events**                        | `onclick={…}` compiles to `addEventListener("click", ...)`, no synthetic wrappers.        |
+| **Shadow DOM by default**                    | Styles are scoped; global CSS can be adopted via `:host` custom props.                    |
 
 ---
 
-> _Building tomorrow’s web, one custom element at a time._
+### 2 . Compile-Time Magick ⟶ Zero-Runtime Web Component
+
+```js
+// ➜ Generated JS (simplified)
+import {effect, signal} from "@fluxel/core";
+
+class CounterElement extends HTMLElement {
+  static observedAttributes = ["initial"];
+
+  constructor() {
+    super();
+    const root = this.attachShadow({mode: "open"});
+
+    const div = document.createElement("div");
+    div.className = "counter";
+
+    const p = document.createElement("p");
+    const txt = document.createTextNode("");
+    p.append("Count: ", txt);
+
+    const btn = document.createElement("button");
+    btn.textContent = "+";
+
+    div.append(p, btn);
+    root.append(div);
+
+    const count = signal(Number(this.getAttribute("initial") ?? 0));
+    btn.addEventListener("click", () => (count.value += 1));
+    effect(() => (txt.data = String(count.value)));
+  }
+}
+customElements.define("flux-counter", CounterElement);
+```
+
+➡ **No framework runtime bundled**—just your logic plus a tiny (\~2 kB gz) signal engine imported once.
+➡ Works in _any_ host app: drop `<script type="module" src="dist/counter.js"></script>` and use
+
+```html
+<flux-counter initial="5"></flux-counter>
+```
+
+---
+
+### 3 . Bigger Building Blocks
+
+| Feature          | Authoring                                                  | Output                                                                        |
+| ---------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Routing**      | `<FluxRouter>` with `<Route path="/foo" component={Foo}/>` | History API listener + lazy element instantiation                             |
+| **Global state** | `import { theme } from "~/store";` (a signal)              | Shared singleton signal—no Redux boilerplate                                  |
+| **SSR**          | `renderToString(<App/>)` in Node                           | HTML with `<template shadowroot="open">…</template>` (Declarative Shadow DOM) |
+
+---
+
+### 4 . Mental Model
+
+1. **Write**: ergonomic TSX + signals (looks like React/Solid).
+2. **Compile** (SWC → Rust WASM plugin): emits raw, standards-compliant Custom Elements.
+3. **Ship**: zero-runtime components that slot into any tech stack or static HTML.
+
+## License
+
+Fluxel is MIT‑licensed. See [LICENSE](LICENSE) for details.
