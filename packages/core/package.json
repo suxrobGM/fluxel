@@ -7,6 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }
