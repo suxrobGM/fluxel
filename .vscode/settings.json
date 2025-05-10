@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "node_modules": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": "./prettier.config.js",
+  "editor.formatOnSave": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
