@@ -1,0 +1,16 @@
+{
+  "name": "@fluxel/swc-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Sukhrob Ilyosbekov",
+  "license": "MIT",
+  "keywords": [
+    "swc-plugin"
+  ],
+  "main": "target/wasm32-wasip1/release/swc_fluxel_plugin.wasm",
+  "scripts": {
+    "prepublishOnly": "cargo build-wasip1 --release"
+  },
+  "files": [],
+  "preferUnplugged": true
+}

@@ -4,8 +4,12 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.configPath": "./prettier.config.js",
+  "rust-analyzer.linkedProjects": ["crates/plugin/Cargo.toml"],
   "editor.formatOnSave": true,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
   }
 }

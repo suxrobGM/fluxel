@@ -1,1 +1,4 @@
 /target
+^target/
+target
+__swc_snapshots__/
